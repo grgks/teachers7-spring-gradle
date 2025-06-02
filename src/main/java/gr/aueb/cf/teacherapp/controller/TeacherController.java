@@ -13,13 +13,11 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Map;
@@ -59,12 +57,29 @@ public class TeacherController {
             TeacherReadOnlyDTO teacherReadOnlyDTO = mapper.mapToTeacherReadOnlyDTO(savedTeacher);
             //model.addAttribute("teacher", savedTeacher); -- request scope
             redirectAttributes.addFlashAttribute("teacher", mapper.mapToTeacherReadOnlyDTO(savedTeacher));
-            return "redirect:/school/success";
+            return "redirect:/school/teachers";
         } catch (EntityAlreadyExistsException | EntityInvalidArgumentException e) {
             LOGGER.error("Teacher with vat={} not inserted", teacherInsertDTO.getVat(), e);
             model.addAttribute("regions", regionService.findAllRegions()); // Re-populate
             model.addAttribute("errorMessage", e.getMessage());
             return "teacher-form";
         }
+    }
+
+    @GetMapping("/teachers")
+    public String getPaginatedTeachers(
+            @RequestParam(defaultValue = "0") int page,  // Default to the first page (0-indexed)
+            @RequestParam(defaultValue = "5") int size,  // Default page size
+            Model model) {
+
+        // Get paginated TeacherReadOnlyDTOs
+        Page<TeacherReadOnlyDTO> teachersPage = teacherService.getPaginatedTeachers(page, size);
+
+        // Add the page of teachers and pagination info to the model
+        model.addAttribute("teachersPage", teachersPage);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", teachersPage.getTotalPages());
+
+        return "teachers";  // Return Thymeleaf view (teachers.html)
     }
 }
