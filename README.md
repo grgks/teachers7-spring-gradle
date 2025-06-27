@@ -27,18 +27,6 @@ This is a Spring Boot project using Gradle as its build tool. It serves as a cle
 
 ---
 
-## 📁 Project Structure
-
-teachers7-spring-gradle/
-├── src/
-│ ├── main/
-│ │ ├── java/ → Application source code
-│ │ └── resources/ → Config files (application.properties), templates, etc.
-│ └── test/ → Unit and integration tests
-├── build.gradle → Gradle build configuration
-├── settings.gradle → Gradle project settings
-└── README.md → Project documentation
----
 ## 🔧 Installation & Setup
 
 1. Clone the repository:
