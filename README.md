@@ -1,4 +1,4 @@
-# teachers7-spring-gra<h1 align="center">📚 teachers7‑spring‑gradle</h1>
+# teachers7-spring-gradle<h1 align="center">📚 teachers7‑spring‑gradle</h1>
 <p align="center">
   A modern Spring Boot starter project with Gradle – perfect for educational or personal use.
 </p>
