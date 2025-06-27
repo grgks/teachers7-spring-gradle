@@ -7,7 +7,6 @@
   <img src="https://img.shields.io/badge/Java-17-blue?style=flat-square" />
   <img src="https://img.shields.io/badge/SpringBoot-3.x-brightgreen?style=flat-square" />
   <img src="https://img.shields.io/badge/Gradle-Build%20Tool-%2302303A?style=flat-square" />
-  <img src="https://img.shields.io/badge/License-MIT-yellow?style=flat-square" />
 </p>
 
 ---
